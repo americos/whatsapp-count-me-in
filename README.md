@@ -1,4 +1,4 @@
-# WhatsApp Group Event Bot
+# WhatsApp Count Me In Bot
 
 A simple WhatsApp bot for managing event sign-ups and waitlists in groups.
 
@@ -9,11 +9,13 @@ A simple WhatsApp bot for managing event sign-ups and waitlists in groups.
 - **Active State**: Only one active event can be managed per group at a time.
 
 ## Commands
-- `!create "Title" Slots "Deadline"`: Create a new event (Admins only).
+- `!create "Event Title" Slots`: Create a new event (Admins only).
 - `!cancel`: Deactivate the current active event (Admins only).
 - `!join`: Sign up for the event or join the waitlist.
 - `!leave`: Withdraw from the event or waitlist.
 - `!status`: Show the current list of participants and waitlist.
+- `!lang en|es`: Change bot language (Admins only).
+- `!help`: Show help message.
 
 ## Setup
 
