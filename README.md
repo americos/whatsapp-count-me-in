@@ -28,10 +28,11 @@ The recommended way to run the bot is using the pre-built Docker image. This ens
 1. Create a persistent file for the database to avoid permission issues, and start the container:
    ```bash
    touch events.db
+   mkdir .wwebjs_auth
    
    docker run -it --rm \
-     -v $(pwd)/.wwebjs_auth:/app/.wwebjs_auth \
-     -v $(pwd)/events.db:/app/events.db \
+     -v $(pwd)/.wwebjs_auth:/app/.wwebjs_auth:z \
+     -v $(pwd)/events.db:/app/events.db:z \
      borlafu/whatsapp-count-me-in
    ```
 
@@ -55,4 +56,4 @@ The recommended way to run the bot is using the pre-built Docker image. This ens
 ## Technology
 - [whatsapp-web.js](https://github.com/pedroslopez/whatsapp-web.js)
 - [better-sqlite3](https://github.com/WiseLibs/better-sqlite3)
-- [qrcode-terminal](https://github.com/gtanner/qrcode-terminal)
+- [node-qrcode](https://github.com/soldair/node-qrcode)
