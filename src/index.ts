@@ -34,12 +34,14 @@ const client = new Client({
         headless: true,
         args: [
             '--no-sandbox',
+            '--no-first-run',
+            '--no-zygote',
             '--disable-setuid-sandbox',
             '--disable-dev-shm-usage',
             '--disable-accelerated-2d-canvas',
-            '--no-first-run',
-            '--no-zygote',
-            '--disable-gpu'
+            '--disable-software-rasterizer',
+            '--disable-extensions',
+            '--disable-gpu',
         ],
     }
 });
