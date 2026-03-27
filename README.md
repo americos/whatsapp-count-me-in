@@ -1,5 +1,7 @@
 # WhatsApp Count Me In Bot
 
+![Docker Build and Publish](https://github.com/borlafu/whatsapp-count-me-in/actions/workflows/docker-publish.yml/badge.svg)
+
 A simple WhatsApp bot for managing event sign-ups and waitlists in groups.
 
 ## Features
