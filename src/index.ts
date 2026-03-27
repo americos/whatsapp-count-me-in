@@ -34,15 +34,21 @@ const client = new Client({
         headless: true,
         args: [
             '--no-sandbox',
-            '--no-first-run',
-            '--no-zygote',
             '--disable-setuid-sandbox',
-            '--disable-dev-shm-usage',
-            '--disable-accelerated-2d-canvas',
-            '--disable-software-rasterizer',
-            '--disable-extensions',
+            '--no-zygote',
+            '--no-first-run',
             '--disable-gpu',
+            '--disable-software-rasterizer',
+            '--disable-accelerated-2d-canvas',
+            '--disable-dev-shm-usage',
+            '--disable-backgrounding-occluded-windows',
+            '--disable-renderer-backgrounding',
+            '--disable-background-timer-throttling',
+            '--disk-cache-size=0',
+            '--media-cache-size=0',
+            '--disable-remote-fonts',
         ],
+        ignoreDefaultArgs: ['--disable-background-networking'],
     }
 });
 
@@ -66,6 +72,12 @@ client.on('message', async (msg: Message) => {
     } catch (err) {
         console.error('Error handling message:', err);
     }
+});
+
+client.on('disconnected', async (reason) => {
+    console.warn('Disconnected:', reason);
+    await client.destroy();
+    await client.initialize();
 });
 
 client.initialize();
