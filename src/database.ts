@@ -45,7 +45,23 @@ db.exec(`
     joined_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (event_id) REFERENCES events(id)
   );
+
+  CREATE TABLE IF NOT EXISTS chat_settings (
+    chat_id TEXT PRIMARY KEY,
+    locale TEXT NOT NULL DEFAULT 'en'
+  );
 `);
+
+import type { Locale } from './i18n.js';
+
+export const getLocale = (chatId: string): Locale => {
+  const row = db.prepare('SELECT locale FROM chat_settings WHERE chat_id = ?').get(chatId) as { locale: string } | undefined;
+  return (row?.locale as Locale) ?? 'en';
+};
+
+export const setLocale = (chatId: string, locale: Locale): void => {
+  db.prepare('INSERT INTO chat_settings (chat_id, locale) VALUES (?, ?) ON CONFLICT(chat_id) DO UPDATE SET locale = excluded.locale').run(chatId, locale);
+};
 
 export const createEvent = (chatId: string, title: string, slots: number, waitlistEnabled: boolean, createdBy: string): number | bigint => {
   const stmt = db.prepare(`
