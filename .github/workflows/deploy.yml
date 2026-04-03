@@ -1,0 +1,22 @@
+name: Continuous Deployment
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to Oracle VM via SSH
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.REMOTE_HOST }}
+          username: ${{ secrets.REMOTE_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            cd ~/whatsapp-count-me-in
+            git pull origin main
+            npm install
+            npm run build
+            pm2 reload ecosystem.config.cjs --update-env
